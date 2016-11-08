@@ -61,18 +61,20 @@ movies.sort(function(a, b) {
     return 0;
 });
 
-movies_star = movies.sort(function (a, b) {
-  return parseFloat(b.imdb_rating) - parseFloat(a.imdb_rating)
-});
-
-
-movies_star.forEach(function(mov) {
+(movies).forEach(function(mov) {
     document.getElementById('movie_list').innerHTML = document.getElementById('movie_list').innerHTML + "<td>" + mov.title + "</td>" + "<td>" + mov.director_list + "</td>" + "<td>" + mov.year + "</td>" + "<td>" + mov.actors.join(", ") + "</td>" + "<td>" + mov.imdb_rating + "</td>" + "<td>" + mov.meta_rating + "</td>"
 })
 
 console.log(JSON.stringify(movies))
 
+movies_star = []
+movies_star.push.apply(movies_star, movies)
 
+movies_star.sort(function (a, b) {
+  return parseFloat(b.imdb_rating) - parseFloat(a.imdb_rating)
+});
 
-
+(movies_star).forEach(function(mov) {
+    document.getElementById('movie_rating').innerHTML = document.getElementById('movie_rating').innerHTML + "<td>" + mov.title + "</td>" + "<td>" + mov.director_list + "</td>" + "<td>" + mov.year + "</td>" + "<td>" + mov.actors.join(", ") + "</td>" + "<td>" + mov.imdb_rating + "</td>" + "<td>" + mov.meta_rating + "</td>"
+})
 console.log(JSON.stringify(movies_star))
